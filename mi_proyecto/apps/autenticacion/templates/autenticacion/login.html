@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Iniciar sesión | BiblioSmart{% endblock %}
+{% block body_class %}auth-body{% endblock %}
+{% block styles %}<link rel="stylesheet" href="{% static 'css/auth.css' %}">{% endblock %}
+{% block body %}
+<main class="auth-layout">
+  <section class="auth-story">
+    <a class="brand auth-brand" href="{% url 'autenticacion:login' %}"><span class="brand-symbol"><i class="bi bi-book-half"></i></span><span>Biblio<strong>Smart</strong><small>Biblioteca digital</small></span></a>
+    <div class="story-content"><span class="eyebrow"><i class="bi bi-stars"></i> TU ESPACIO PARA APRENDER</span><h1>Las grandes ideas<br>comienzan <em>leyendo.</em></h1><p>Explora miles de historias, conocimientos y recursos desde un solo lugar.</p><div class="story-quote"><i class="bi bi-quote"></i><span>Un libro es un sueño que tienes en tus manos.<small>— Neil Gaiman</small></span></div></div>
+    <div class="story-footer"><span><i class="bi bi-geo-alt"></i> Arequipa, Perú</span><span>© 2026 BiblioSmart</span></div>
+  </section>
+  <section class="auth-panel"><div class="auth-card">
+    <div class="auth-mobile-brand"><span class="brand-symbol"><i class="bi bi-book-half"></i></span><strong>BiblioSmart</strong></div>
+    <span class="auth-kicker">BIENVENIDO DE VUELTA</span><h2>Iniciar sesión</h2><p class="auth-intro">Ingresa tus datos para acceder a tu biblioteca.</p>
+    <form id="login-form" data-demo-login novalidate>
+      <label class="auth-label" for="correo">Usuario o correo electrónico</label>
+      <div class="input-wrap"><i class="bi bi-envelope"></i><input type="text" id="correo" name="correo" placeholder="nombre@colegio.edu.pe" autocomplete="username" required aria-describedby="correo-error"></div><small class="field-error" id="correo-error"></small>
+      <label class="auth-label mt-3" for="contrasena">Contraseña</label>
+      <div class="input-wrap"><i class="bi bi-lock"></i><input type="password" id="contrasena" name="contrasena" placeholder="Ingresa tu contraseña" autocomplete="current-password" required aria-describedby="contrasena-error"><button type="button" class="password-toggle" id="toggle-password" aria-label="Mostrar contraseña" aria-pressed="false"><i class="bi bi-eye"></i></button></div><small class="field-error" id="contrasena-error"></small>
+      <div class="auth-options"><label class="check-label"><input type="checkbox" name="recordar"> <span>Recordar sesión</span></label><a href="{% url 'autenticacion:recuperar_clave' %}">¿Olvidaste tu contraseña?</a></div>
+      <label class="auth-label" for="demo-role">Ingresar como</label>
+      <div class="input-wrap select-wrap"><i class="bi bi-person-badge"></i><select id="demo-role" name="role"><option value="{% url 'catalogo:estudiante' %}">Estudiante</option><option value="{% url 'catalogo:docente' %}">Docente</option><option value="{% url 'prestamos:gestionar' %}">Bibliotecario</option></select><i class="bi bi-chevron-down select-chevron"></i></div>
+      <button class="auth-submit" type="submit">Iniciar sesión <i class="bi bi-arrow-right"></i></button>
+      <p class="demo-hint"><i class="bi bi-info-circle"></i> Acceso de demostración: no se validan credenciales.</p>
+    </form>
+  </div></section>
+</main>
+<div class="toast-container position-fixed bottom-0 end-0 p-3" id="toast-container" aria-live="polite"></div>
+{% endblock %}
+{% block scripts %}<script src="{% static 'js/login.js' %}" defer></script>{% endblock %}

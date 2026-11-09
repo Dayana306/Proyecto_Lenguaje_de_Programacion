@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Mi biblioteca | BiblioSmart{% endblock %}
+{% block breadcrumb %}<span>Mi espacio</span><i class="bi bi-chevron-right"></i><strong>Catálogo digital</strong>{% endblock %}
+{% block content %}
+<section class="welcome-banner student-banner">
+  <div class="welcome-copy"><span class="eyebrow">MARTES, 8 DE NOVIEMBRE DE 2026</span><h1>¡Hola, {{ user_name }}! <span class="wave">✦</span></h1><p>Hoy es un buen día para descubrir una nueva historia.</p><a class="btn btn-light welcome-cta" href="#catalogo">Explorar biblioteca <i class="bi bi-arrow-down-right"></i></a></div>
+  <div class="welcome-illustration" aria-hidden="true"><div class="floating-book book-one"><i class="bi bi-book"></i></div><div class="floating-book book-two"><i class="bi bi-journal-bookmark"></i></div><i class="bi bi-stars sparkle"></i></div>
+</section>
+<section class="stat-grid" aria-label="Resumen de biblioteca">
+  <article class="stat-card"><span class="stat-icon blue"><i class="bi bi-journals"></i></span><div><span class="stat-label">Libros disponibles</span><strong>248</strong><small><i class="bi bi-arrow-up-right"></i> 12 nuevos este mes</small></div></article>
+  <article class="stat-card"><span class="stat-icon mint"><i class="bi bi-bookmark-check"></i></span><div><span class="stat-label">Mis préstamos</span><strong>{{ loan_count }}</strong><small>1 vence en 5 días</small></div></article>
+  <article class="stat-card"><span class="stat-icon amber"><i class="bi bi-hourglass-split"></i></span><div><span class="stat-label">Solicitudes pendientes</span><strong>{{ pending_count }}</strong><small>En revisión</small></div></article>
+</section>
+<section class="content-section" id="catalogo">
+  <div class="section-head"><div><span class="eyebrow">UNIVERSO DE LECTURAS</span><h2>Explora el catálogo</h2><p>Encuentra tu próxima lectura favorita.</p></div><a class="subtle-link" href="{% url 'catalogo:visor_lectura' %}">Continuar leyendo <i class="bi bi-arrow-right"></i></a></div>
+  <div class="filter-toolbar">
+    <label class="search-control"><i class="bi bi-search"></i><input type="search" placeholder="Título, autor o palabra clave" aria-label="Buscar libros" data-catalog-search></label>
+    <select class="form-select filter-select" aria-label="Filtrar por categoría" data-catalog-filter="category"><option value="">Todas las categorías</option><option>Literatura</option><option>Filosofía</option><option>Ciencia</option><option>Matemática</option></select>
+    <select class="form-select filter-select" aria-label="Filtrar por grado" data-catalog-filter="grade"><option value="">Todos los grados</option><option>1.° y 2.° secundaria</option><option>3.° a 5.° secundaria</option><option>4.° y 5.° secundaria</option></select>
+    <select class="form-select filter-select" aria-label="Filtrar por autor" data-catalog-filter="author"><option value="">Todos los autores</option>{% for book in books %}<option>{{ book.author }}</option>{% endfor %}</select>
+  </div>
+  <div class="book-grid" data-catalog-grid>
+    {% for book in books %}<article class="book-card" data-catalog-card data-title="{{ book.title|lower }}" data-author="{{ book.author|lower }}" data-category="{{ book.category }}" data-grade="{{ book.grade }}">
+      <div class="book-cover {{ book.color }}"><span class="cover-emblem"><i class="bi bi-book-half"></i></span><span class="cover-title">{{ book.title }}</span><span class="cover-author">{{ book.author }}</span><span class="cover-spine"></span></div>
+      <div class="book-card-body"><span class="book-category">{{ book.category }}</span><h3>{{ book.title }}</h3><p class="book-author">{{ book.author }}</p><p class="book-description">{{ book.description }}</p><div class="book-card-actions"><button class="btn btn-outline-primary btn-sm" type="button" data-book-details data-title="{{ book.title }}" data-author="{{ book.author }}" data-category="{{ book.category }}" data-grade="{{ book.grade }}" data-year="{{ book.year }}" data-format="{{ book.format }}" data-description="{{ book.description }}">Detalles</button><button class="btn btn-primary btn-sm" type="button" data-loan-request="{{ book.title }}">Solicitar <i class="bi bi-arrow-right"></i></button></div></div>
+    </article>{% endfor %}
+    <div class="empty-state" data-catalog-empty hidden><i class="bi bi-search"></i><strong>No encontramos libros</strong><span>Prueba con otros términos o filtros.</span></div>
+  </div>
+</section>
+<section class="content-section loans-preview" id="mis-prestamos">
+  <div class="section-head"><div><span class="eyebrow">TU ACTIVIDAD</span><h2>Mis préstamos recientes</h2><p>Ten a la mano las fechas importantes.</p></div><button class="btn btn-outline-primary btn-sm" type="button" data-toast="Estás viendo todos tus préstamos de demostración.">Ver historial <i class="bi bi-arrow-right"></i></button></div>
+  <div class="table-card"><div class="table-responsive"><table class="table align-middle data-table"><thead><tr><th>Libro</th><th>Fecha de solicitud</th><th>Fecha de devolución</th><th>Estado</th></tr></thead><tbody><tr><td><span class="table-book"><span class="mini-cover cover-gold"></span><strong>Cien años de soledad</strong></span></td><td>04 nov 2026</td><td>15 nov 2026</td><td><span class="status-badge status-approved">Aprobado</span></td></tr><tr><td><span class="table-book"><span class="mini-cover cover-blue"></span><strong>El mundo de Sofía</strong></span></td><td>07 nov 2026</td><td>—</td><td><span class="status-badge status-pending">Pendiente</span></td></tr></tbody></table></div></div>
+</section>
+<div class="modal fade" id="bookDetailsModal" tabindex="-1" aria-labelledby="book-modal-title" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><div><span class="eyebrow">DETALLES DEL LIBRO</span><h2 class="modal-title fs-5" id="book-modal-title" data-detail="title">Libro</h2></div><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button></div><div class="modal-body"><p class="text-primary fw-semibold mb-1" data-detail="category"></p><p class="text-secondary" data-detail="author"></p><p data-detail="description"></p><div class="detail-chips"><span><i class="bi bi-calendar3"></i> <b data-detail="year"></b></span><span><i class="bi bi-file-earmark"></i> <b data-detail="format"></b></span><span><i class="bi bi-mortarboard"></i> <b data-detail="grade"></b></span></div></div><div class="modal-footer"><button class="btn btn-light" data-bs-dismiss="modal">Cerrar</button><a class="btn btn-primary" href="{% url 'catalogo:visor_lectura' %}">Abrir lector <i class="bi bi-arrow-up-right"></i></a></div></div></div></div>
+{% endblock %}

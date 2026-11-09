@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Recuperar contraseña | BiblioSmart{% endblock %}
+{% block body_class %}auth-body{% endblock %}
+{% block styles %}<link rel="stylesheet" href="{% static 'css/auth.css' %}">{% endblock %}
+{% block body %}
+<main class="auth-layout">
+  <section class="auth-story">
+    <a class="brand auth-brand" href="{% url 'autenticacion:login' %}"><span class="brand-symbol"><i class="bi bi-book-half"></i></span><span>Biblio<strong>Smart</strong><small>Biblioteca digital</small></span></a>
+    <div class="story-content"><span class="eyebrow"><i class="bi bi-shield-check"></i> TU CUENTA, SEGURA</span><h1>Recupera el acceso<br>a <em>tus lecturas.</em></h1><p>Te ayudaremos a volver a tu espacio de aprendizaje en unos pasos.</p></div>
+    <div class="story-footer"><span><i class="bi bi-geo-alt"></i> Arequipa, Perú</span><span>© 2026 BiblioSmart</span></div>
+  </section>
+  <section class="auth-panel"><div class="auth-card">
+    <div class="auth-mobile-brand"><span class="brand-symbol"><i class="bi bi-book-half"></i></span><strong>BiblioSmart</strong></div>
+    <a class="back-to-login" href="{% url 'autenticacion:login' %}"><i class="bi bi-arrow-left"></i> Volver al inicio de sesión</a>
+    <span class="auth-kicker">RECUPERACIÓN DE CUENTA</span><h2>¿Olvidaste tu contraseña?</h2><p class="auth-intro">Escribe tu correo institucional. Te enviaremos las instrucciones para restablecerla.</p>
+    <form id="recovery-form" novalidate>
+      <label class="auth-label" for="recovery-email">Correo electrónico</label>
+      <div class="input-wrap"><i class="bi bi-envelope"></i><input type="email" id="recovery-email" name="email" placeholder="nombre@colegio.edu.pe" autocomplete="email" required></div>
+      <small class="field-error" id="recovery-error"></small>
+      <div class="recovery-feedback" id="recovery-feedback" role="status" hidden></div>
+      <button class="auth-submit mt-4" type="submit">Enviar instrucciones <i class="bi bi-send"></i></button>
+    </form>
+    <p class="demo-hint"><i class="bi bi-info-circle"></i> Esta demostración muestra el flujo visual, no envía correos.</p>
+  </div></section>
+</main>
+<div class="toast-container position-fixed bottom-0 end-0 p-3" id="toast-container" aria-live="polite"></div>
+{% endblock %}
+{% block scripts %}<script src="{% static 'js/recuperar_clave.js' %}" defer></script>{% endblock %}
