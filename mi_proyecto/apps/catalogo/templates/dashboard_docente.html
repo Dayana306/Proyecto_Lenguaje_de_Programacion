@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Catálogo y panel del docente de BiblioSmart.">
+    <title>Catálogo del docente | BiblioSmart</title>
+    <link rel="stylesheet" href="../../../static/css/dashboard_docente.css">
+    <link rel="stylesheet" href="../../../static/css/dashboard_estudiante.css">
+    <script src="../../../static/js/dashboard_docente.js" defer></script>
+</head>
+
+<body class="student-page teacher-page">
+    <header class="student-topbar">
+        <div class="student-topbar-inner">
+            <a class="student-brand" href="#catalogo" aria-label="BiblioSmart, ir al catálogo">
+                <span class="student-brand-mark" aria-hidden="true">
+                    <svg viewBox="0 0 48 48" focusable="false">
+                        <path d="M7 10.5c6-1.8 11.7-.9 17 2.8v25c-5.3-3.7-11-4.6-17-2.8z"></path>
+                        <path d="M41 10.5c-6-1.8-11.7-.9-17 2.8v25c5.3-3.7 11-4.6 17-2.8z"></path>
+                        <path d="M24 13.3v25"></path>
+                    </svg>
+                </span>
+                <span class="student-brand-name">Biblio<strong>Smart</strong></span>
+            </a>
+
+            <nav class="student-nav teacher-nav" aria-label="Navegación del docente">
+                <a class="nav-item active" href="#catalogo" aria-current="page"><span class="nav-icon"
+                        aria-hidden="true">▤</span> Catálogo digital</a>
+                <a class="nav-item" href="#materiales"><span class="nav-icon" aria-hidden="true">＋</span> Material
+                    complementario</a>
+                <a class="nav-item" href="#prestamos"><span class="nav-icon" aria-hidden="true">◷</span> Historial de
+                    préstamos</a>
+            </nav>
+
+            <div class="profile-area">
+                <button class="student-profile" type="button" data-profile-toggle aria-expanded="false"
+                    aria-controls="teacher-profile-menu">
+                    <span class="profile-avatar" aria-hidden="true">D</span>
+                    <span class="profile-copy"><strong>Docente</strong><small>Docente</small></span>
+                    <span class="profile-chevron" aria-hidden="true">⌄</span>
+                </button>
+                <div class="profile-menu" id="teacher-profile-menu" hidden>
+                    <button type="button" class="logout-option" id="logoutButton" href="login.html">
+                        ↪ Cerrar sesión
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="student-main teacher-main">
+        <section class="student-welcome teacher-welcome" aria-labelledby="teacher-welcome-title">
+            <div class="welcome-copy">
+                <p class="section-kicker">ESPACIO DOCENTE</p>
+                <h1 id="teacher-welcome-title">Recursos para enseñar,<br><em>compartir y aprender.</em></h1>
+                <p>Consulta libros digitales de tus materias y grados asignados, y comparte material complementario con
+                    tus estudiantes.</p>
+
+            </div>
+            <div class="welcome-art" aria-hidden="true">
+                <span class="art-orbit orbit-one"></span><span class="art-orbit orbit-two"></span>
+                <span class="art-book book-a"></span><span class="art-book book-b"></span><span
+                    class="art-book book-c"></span>
+                <span class="art-star star-a">✳</span><span class="art-star star-b">✦</span><span
+                    class="art-caption">COMPARTE RECURSOS</span>
+            </div>
+        </section>
+
+        <section class="teacher-workspace" aria-label="Catálogo y carga de materiales">
+            <div class="teacher-catalog-column">
+                <section class="catalog-section teacher-catalog" id="catalogo" aria-labelledby="teacher-catalog-title">
+                    <div class="section-heading-row">
+                        <div>
+                            <h2 id="teacher-catalog-title">Catálogo para tus clases</h2>
+                            <p class="section-subtitle">Libros digitales asociados a las materias y grados que tienes
+                                asignados.</p>
+                        </div>
+                    </div>
+                    <form method="get" class="student-search-form teacher-search-form" role="search" data-preview-only>
+                        <label class="search-box" for="teacher-search"><span aria-hidden="true">⌕</span><input
+                                id="teacher-search" type="search" name="q" value=""
+                                placeholder="Buscar por título, autor o materia"></label>
+                        <button class="search-submit" type="submit">Buscar</button>
+                    </form>
+                    <div class="student-book-grid teacher-book-grid">
+                        <div class="student-empty-state">
+                            <div class="empty-icon" aria-hidden="true">▤</div>
+                            <h3>No hay recursos para mostrar</h3>
+                            <p>Los libros digitales asociados a tus materias y grados aparecerán aquí cuando estén
+                                disponibles.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <aside class="teacher-material-panel" id="materiales" aria-labelledby="material-title">
+                <div class="teacher-panel-heading"><span class="teacher-panel-icon" aria-hidden="true">＋</span>
+                    <div>
+                        <h2 id="material-title">Material complementario</h2>
+                    </div>
+                </div>
+                <p class="teacher-panel-intro">Sube archivos educativos o materiales de refuerzo para tus clases.</p>
+                <form method="post" enctype="multipart/form-data" class="teacher-material-form" data-preview-only>
+                    <input type="hidden" name="accion" value="cargar_material">
+                    <label for="material-nombre">Nombre del recurso</label>
+                    <input id="material-nombre" type="text" name="nombre" maxlength="150"
+                        placeholder="Título del material" required>
+                    <label for="material-descripcion">Descripción</label>
+                    <textarea id="material-descripcion" name="descripcion" rows="3"
+                        placeholder="Detalles o instrucciones de uso"></textarea>
+                    <label for="material-archivo">Archivo educativo</label>
+                    <label class="teacher-file-drop" for="material-archivo"><span class="teacher-file-icon"
+                            aria-hidden="true">↑</span><strong>Seleccionar archivo</strong><small>PDF, DOCX o
+                            JPG</small><span class="selected-file" data-file-name>No se ha seleccionado un
+                            archivo</span></label>
+                    <input class="teacher-file-input" id="material-archivo" type="file" name="archivo"
+                        accept=".pdf,.docx,.jpg,.jpeg" required>
+                    <div class="teacher-material-fields">
+                        <div><label for="material-grado">Grado destino</label><input id="material-grado" type="text"
+                                name="gradoDestino" maxlength="30" placeholder="Grado"></div>
+                        <div><label for="material-area">Área</label><input id="material-area" type="text" name="area"
+                                maxlength="100" placeholder="Asignatura"></div>
+                    </div>
+                    <label class="teacher-visibility-option"><input type="checkbox" name="estado" value="1"
+                            checked><span>Visible para los estudiantes</span></label>
+                    <button class="teacher-upload-button" type="submit">Cargar material <span
+                            aria-hidden="true">↗</span></button>
+                </form>
+
+            </aside>
+        </section>
+
+        <section class="student-loans-section teacher-loans-section" id="prestamos"
+            aria-labelledby="teacher-loans-title">
+            <div class="loans-heading">
+                <div>
+                    <h2 id="teacher-loans-title">Historial de préstamos</h2>
+                    <p class="section-subtitle">Consulta el estado de tus solicitudes y préstamos.</p>
+                </div><span class="history-mark" aria-hidden="true">◷</span>
+            </div>
+            <div class="loans-table-wrap">
+                <table class="student-loans-table">
+                    <thead>
+                        <tr>
+                            <th>Préstamo</th>
+                            <th>Libro (ID)</th>
+                            <th>Solicitud</th>
+                            <th>Expiración</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="5" class="table-empty">Todavía no tienes solicitudes de préstamo registradas.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="teacher-uploaded-section" id="materiales-cargados" aria-labelledby="uploaded-title">
+            <div class="teacher-uploaded-heading">
+                <div>
+                    <h2 id="uploaded-title">Materiales cargados</h2>
+                </div>
+            </div>
+            <div class="teacher-uploaded-list">
+                <p class="teacher-uploaded-empty">Los materiales complementarios que cargues aparecerán aquí.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <dialog class="book-dialog" id="book-dialog" aria-labelledby="dialog-title">
+        <div class="dialog-top"><span>DETALLES DEL LIBRO</span><button type="button" class="dialog-close"
+                data-close-dialog aria-label="Cerrar detalles">×</button></div>
+        <div class="dialog-content">
+            <div class="dialog-book-mark" aria-hidden="true">B.</div>
+            <p class="dialog-category" id="dialog-category"></p>
+            <h2 id="dialog-title"></h2>
+            <p class="dialog-author" id="dialog-author"></p>
+            <p class="dialog-description" id="dialog-description"></p>
+            <dl class="dialog-details">
+                <div>
+                    <dt>Editorial</dt>
+                    <dd id="dialog-publisher"></dd>
+                </div>
+                <div>
+                    <dt>Año</dt>
+                    <dd id="dialog-year"></dd>
+                </div>
+                <div>
+                    <dt>Grado destino</dt>
+                    <dd id="dialog-grade"></dd>
+                </div>
+                <div>
+                    <dt>Formato</dt>
+                    <dd id="dialog-format"></dd>
+                </div>
+            </dl>
+        </div>
+    </dialog>
+    <script src="../../../static/js/bibliosmart-ui.js"></script>
+    <script src="../../../static/js/dashboard_docente.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Recuperación de contraseña de BiblioSmart.">
+    <title>Recuperar contraseña | BiblioSmart</title>
+    <link rel="stylesheet" href="../../../static/css/recuperar_clave.css">
+    <script src="../../../static/js/recuperar_clave.js" defer></script>
+</head>
+
+<body class="recovery-page">
+    <main class="recovery-screen">
+        <section class="recovery-card" aria-labelledby="recovery-title">
+            <div class="brand-icon" aria-hidden="true">
+                <svg viewBox="0 0 48 48">
+                    <path d="M7 10.5c6-1.8 11.7-.9 17 2.8v25c-5.3-3.7-11-4.6-17-2.8z" />
+                    <path d="M41 10.5c-6-1.8-11.7-.9-17 2.8v25c5.3-3.7 11-4.6 17-2.8z" />
+                    <path d="M24 13.3v25" />
+                </svg>
+            </div>
+            <h1 id="recovery-title">Recuperar contraseña</h1>
+            <br>
+            <form id="recovery-form" method="post" novalidate data-preview-only>
+
+                <div class="form-field">
+                    <label for="correoElectronico">Correo electrónico</label>
+                    <input type="email" id="correoElectronico" name="correoElectronico" value="" autocomplete="email"
+                        inputmode="email" placeholder="Ingresa tu correo electrónico" required
+                        aria-describedby="correo-error">
+                    <small class="field-error" id="correo-error"></small>
+                </div>
+
+                <div class="form-field">
+                    <label for="contrasenia">Nueva contraseña</label>
+                    <div class="password-field">
+                        <input type="password" id="contrasenia" name="contrasenia" autocomplete="new-password"
+                            placeholder="Ingresa tu nueva contraseña" required aria-describedby="contrasenia-error">
+                        <button class="show-password" type="button" data-toggle-password="contrasenia"
+                            aria-label="Mostrar contraseña" aria-pressed="false">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </button>
+                    </div>
+                    <small class="field-error" id="contrasenia-error"></small>
+                </div>
+
+                <div class="form-field">
+                    <label for="confirmar_contrasenia">Confirmar contraseña</label>
+                    <div class="password-field">
+                        <input type="password" id="confirmar_contrasenia" name="confirmar_contrasenia"
+                            autocomplete="new-password" placeholder="Vuelve a escribir la contraseña" required
+                            aria-describedby="confirmar-error">
+                        <button class="show-password" type="button" data-toggle-password="confirmar_contrasenia"
+                            aria-label="Mostrar contraseña" aria-pressed="false">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </button>
+                    </div>
+                    <small class="field-error" id="confirmar-error"></small>
+                </div>
+
+                <button class="recovery-button" type="submit">Enviar</button>
+            </form>
+
+            <a class="back-link" href="login.html">← Volver al inicio de sesión</a>
+        </section>
+    </main>
+</body>
+
+</html>

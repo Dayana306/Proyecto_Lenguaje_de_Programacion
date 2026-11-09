@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Catálogo y panel del estudiante de BiblioSmart.">
+    <title>Catálogo del estudiante | BiblioSmart</title>
+    <link rel="stylesheet" href="../../../static/css/dashboard_estudiante.css">
+    <script src="../../../static/js/dashboard_estudiante.js" defer></script>
+</head>
+
+<body class="student-page">
+    <header class="student-topbar">
+        <div class="student-topbar-inner">
+            <a class="student-brand" href="#catalogo" aria-label="BiblioSmart, ir al catálogo">
+                <span class="student-brand-mark" aria-hidden="true">
+                    <svg viewBox="0 0 48 48" focusable="false">
+                        <path d="M7 10.5c6-1.8 11.7-.9 17 2.8v25c-5.3-3.7-11-4.6-17-2.8z"></path>
+                        <path d="M41 10.5c-6-1.8-11.7-.9-17 2.8v25c5.3-3.7 11-4.6 17-2.8z"></path>
+                        <path d="M24 13.3v25"></path>
+                    </svg>
+                </span>
+                <span class="student-brand-name">Biblio<strong>Smart</strong></span>
+            </a>
+
+            <nav class="student-nav" aria-label="Navegación del estudiante">
+                <a class="nav-item active" href="#catalogo" aria-current="page">
+                    <span class="nav-icon" aria-hidden="true">▤</span> Catálogo digital
+                </a>
+                <a class="nav-item" href="#prestamos">
+                    <span class="nav-icon" aria-hidden="true">◷</span> Historial de préstamos
+                </a>
+            </nav>
+
+            <div class="profile-area">
+                <button class="student-profile" type="button" data-profile-toggle aria-expanded="false"
+                    aria-controls="profile-menu">
+                    <span class="profile-avatar" aria-hidden="true">E</span>
+                    <span class="profile-copy">
+                        <strong>Estudiante</strong>
+                        <small>Estudiante</small>
+                    </span>
+                    <span class="profile-chevron" aria-hidden="true">⌄</span>
+                </button>
+
+                <div class="profile-menu" id="profile-menu" hidden>
+                    
+                    <button type="button" class="logout-option" id="logoutButton" href="login.html">
+                        ↪ Cerrar sesión
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="student-main">
+        <section class="student-welcome" aria-labelledby="welcome-title">
+            <div class="welcome-copy">
+                <p class="section-kicker">TU BIBLIOTECA DIGITAL</p>
+                <h1 id="welcome-title">Un mundo de ideas,<br><em>en cada página.</em></h1>
+                <p>Encuentra libros y consulta los recursos educativos disponibles para ti.</p>
+            </div>
+            <div class="welcome-art" aria-hidden="true">
+                <span class="art-orbit orbit-one"></span>
+                <span class="art-orbit orbit-two"></span>
+                <span class="art-book book-a"></span>
+                <span class="art-book book-b"></span>
+                <span class="art-book book-c"></span>
+                <span class="art-star star-a">✳</span>
+                <span class="art-star star-b">✦</span>
+                <span class="art-caption">LEE A TU RITMO</span>
+            </div>
+        </section>
+
+
+
+        <section class="catalog-section" id="catalogo" aria-labelledby="catalog-title">
+            <div class="section-heading-row">
+                <div>
+                    <h2 id="catalog-title">Explora el catálogo</h2>
+                    <p class="section-subtitle">Encuentra libros digitales y recursos educativos disponibles.</p>
+                </div>
+            </div>
+
+            <form method="get" class="student-search-form" role="search" data-preview-only>
+                <label class="search-box" for="student-search">
+                    <span aria-hidden="true">⌕</span>
+                    <input id="student-search" type="search" name="q" value=""
+                        placeholder="Buscar por título, autor o categoría">
+                </label>
+                <label class="category-select-label" for="student-category">Categoría</label>
+                <select id="student-category" name="categoria" class="category-select">
+                    <option value="">Todas las categorías</option>
+
+                </select>
+                <button class="search-submit" type="submit">Buscar</button>
+            </form>
+
+            <div class="student-book-grid">
+                <div class="student-empty-state">
+                    <div class="empty-icon" aria-hidden="true">▤</div>
+                    <h3>No hay libros para mostrar</h3>
+                    <p>Los libros digitales disponibles aparecerán en este espacio.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="student-loans-section" id="prestamos" aria-labelledby="loans-title">
+            <div class="loans-heading">
+                <div>
+                    <h2 id="loans-title">Mi historial de préstamos</h2>
+                    <p class="section-subtitle">Consulta el estado de tus solicitudes.</p>
+                </div>
+                <span class="history-mark" aria-hidden="true">◷</span>
+            </div>
+            <div class="loans-table-wrap">
+                <table class="student-loans-table">
+                    <thead>
+                        <tr>
+                            <th>Préstamo</th>
+                            <th>Libro (ID)</th>
+                            <th>Solicitud</th>
+                            <th>Expiración</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="5" class="table-empty">Todavía no tienes solicitudes de préstamo registradas.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <dialog class="book-dialog" id="book-dialog" aria-labelledby="dialog-title">
+        <div class="dialog-top">
+            <span>DETALLES DEL LIBRO</span>
+            <button type="button" class="dialog-close" data-close-dialog aria-label="Cerrar detalles">×</button>
+        </div>
+        <div class="dialog-content">
+            <div class="dialog-book-mark" aria-hidden="true">B.</div>
+            <p class="dialog-category" id="dialog-category"></p>
+            <h2 id="dialog-title"></h2>
+            <p class="dialog-author" id="dialog-author"></p>
+            <p class="dialog-description" id="dialog-description"></p>
+            <dl class="dialog-details">
+                <div>
+                    <dt>Editorial</dt>
+                    <dd id="dialog-publisher"></dd>
+                </div>
+                <div>
+                    <dt>Año</dt>
+                    <dd id="dialog-year"></dd>
+                </div>
+                <div>
+                    <dt>Grado destino</dt>
+                    <dd id="dialog-grade"></dd>
+                </div>
+                <div>
+                    <dt>Formato</dt>
+                    <dd id="dialog-format"></dd>
+                </div>
+            </dl>
+        </div>
+    </dialog>
+
+    <script src="../../../static/js/bibliosmart-ui.js"></script>
+    <script src="../../../static/js/dashboard_estudiante.js"></script>
+</body>
+
+</html>

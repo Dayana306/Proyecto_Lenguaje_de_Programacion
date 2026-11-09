@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar sesión | BiblioSmart</title>
+  <link rel="stylesheet" href="../../../static/css/login.css">
+  <script src="../../../static/js/login.js"></script>
+</head>
+
+<body>
+  <main class="login-screen">
+    <section class="login-card" aria-labelledby="login-title">
+      <div class="brand-icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48">
+          <path d="M7 10.5c6-1.8 11.7-.9 17 2.8v25c-5.3-3.7-11-4.6-17-2.8z" />
+          <path d="M41 10.5c-6-1.8-11.7-.9-17 2.8v25c5.3-3.7 11-4.6 17-2.8z" />
+          <path d="M24 13.3v25" />
+        </svg>
+      </div>
+      <h1 id="login-title">Iniciar sesión</h1>
+      <br>
+      <form id="login-form" novalidate>
+        <div class="form-field">
+          <label for="correo">Correo electrónico</label>
+          <input type="email" id="correo" name="correo" placeholder="Ingresa tu correo" autocomplete="username"
+            inputmode="email" required aria-describedby="correo-error">
+          <small class="field-error" id="correo-error"></small>
+        </div>
+        <div class="form-field">
+          <label for="contrasena">Contraseña</label>
+          <div class="password-field">
+            <input type="password" id="contrasena" name="contrasena" placeholder="Ingresa tu contraseña"
+              autocomplete="current-password" required aria-describedby="contrasena-error">
+            <button class="show-password" type="button" id="toggle-password" aria-label="Mostrar contraseña"
+              aria-pressed="false">
+              <svg viewBox="0 0 24 24">
+                <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            </button>
+          </div>
+          <small class="field-error" id="contrasena-error"></small>
+        </div>
+        <div class="forgot-row"><a href="recuperar_clave.html">¿Olvidaste tu contraseña?</a></div>
+        <button class="login-button" type="submit">Iniciar sesión</button>
+      </form>
+    </section>
+  </main>
+</body>
+
+</html>
